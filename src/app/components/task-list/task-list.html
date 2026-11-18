@@ -1,0 +1,56 @@
+<section class="container">
+  <div class="header">
+    <div>
+      <h2>My Tasks</h2>
+      <p>Manage your daily activities</p>
+    </div>
+
+    <a routerLink="/tasks/new" class="btn-primary"> + Create Task </a>
+  </div>
+
+  @if (loading()) {
+    <p class="info-message">Loading tasks...</p>
+  } @else if (errorMessage()) {
+    <p class="error-message">{{ errorMessage() }}</p>
+  } @else {
+    <div class="task-grid">
+      @for (task of tasks(); track task.id) {
+        <div class="task-card">
+          <div class="task-header">
+            <h3>{{ task.title }}</h3>
+
+            @if (task.completed) {
+              <span class="completed">Completed</span>
+            } @else {
+              <span class="pending">Pending</span>
+            }
+          </div>
+
+          <p class="description">
+            {{ task.description }}
+          </p>
+
+          <div class="actions">
+            <a [routerLink]="['/tasks', task.id]"> Details </a>
+
+            <button
+              type="button"
+              class="complete-btn"
+              [disabled]="task.completed"
+              (click)="toggleCompleted(task.id)"
+            >
+              {{ task.completed ? 'Completed' : 'Mark as Complete' }}
+            </button>
+
+            <button type="button" class="delete" (click)="deleteTask(task.id)">Delete</button>
+          </div>
+        </div>
+      } @empty {
+        <div class="empty-state">
+          <h3>No tasks available</h3>
+          <p>Create your first task to get started.</p>
+        </div>
+      }
+    </div>
+  }
+</section>

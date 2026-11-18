@@ -1,0 +1,48 @@
+<section class="container">
+
+  @if (loading()) {
+    <p class="info-message">Loading task details...</p>
+  }
+  @else if (errorMessage()) {
+    <div class="error-message">
+      {{ errorMessage() }}
+    </div>
+  }
+  @else if (task(); as currentTask) {
+
+    <div class="task-card">
+
+      <div class="header">
+        <h2>Task Details</h2>
+
+        <span [class.completed]="currentTask.completed"
+              [class.pending]="!currentTask.completed">
+          {{ currentTask.completed ? 'Completed' : 'Pending' }}
+        </span>
+      </div>
+
+      <div class="detail">
+        <label>Task ID</label>
+        <p>{{ currentTask.id }}</p>
+      </div>
+
+      <div class="detail">
+        <label>Title</label>
+        <p>{{ currentTask.title }}</p>
+      </div>
+
+      <div class="detail">
+        <label>Description</label>
+        <p>{{ currentTask.description }}</p>
+      </div>
+
+      <div class="actions">
+        <a routerLink="/tasks" class="btn-secondary">
+          Back to Tasks
+        </a>
+      </div>
+
+    </div>
+  }
+
+</section>

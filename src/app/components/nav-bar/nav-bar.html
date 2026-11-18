@@ -1,0 +1,18 @@
+<nav class="navbar">
+  <a routerLink="/tasks" class="brand">
+    TaskFlow
+  </a>
+
+  <div class="nav-links">
+    <a routerLink="/tasks"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}">
+      Tasks
+    </a>
+
+    <a routerLink="/tasks/new"
+       routerLinkActive="active">
+      Add Task
+    </a>
+  </div>
+</nav>
